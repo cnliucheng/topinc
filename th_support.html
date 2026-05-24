@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>《戒烟了吗》技术支持与功能使用说明 | App Support</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --primary-light: #E6F4EA;
+            --bg-color: #FAFCF9;
+            --card-bg: #FFFFFF;
+            --text-main: #1F2937;
+            --text-muted: #4B5563;
+            --text-light: #9CA3AF;
+            --border-color: #E5E7EB;
+            --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.03);
+            --radius-lg: 16px;
+            --radius-md: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .bg-gradient-decorator {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 380px;
+            background: linear-gradient(180deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0) 100%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* 页头设计 */
+        header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .logo-wrapper {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 72px;
+            height: 72px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-svg {
+            width: 36px;
+            height: 36px;
+            fill: #FFFFFF;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        main {
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(16, 185, 129, 0.06);
+        }
+
+        section {
+            margin-bottom: 44px;
+        }
+
+        section:last-of-type {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 18px;
+            background-color: var(--primary);
+            border-radius: 3px;
+        }
+
+        /* 1. 功能卡片双列布局 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .feature-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            background: #FAFAFA;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary);
+            background: #FFFFFF;
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.04);
+        }
+
+        .feature-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            font-size: 1.2rem;
+            margin-bottom: 16px;
+        }
+
+        .feature-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .feature-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* 2. 操作指南步骤布局 */
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px;
+            border-radius: var(--radius-md);
+            border: 1px dashed var(--border-color);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+
+        .step-content p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* 3. 联系人卡片 */
+        .contact-box {
+            background-color: var(--primary-light);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            text-align: center;
+        }
+
+        .contact-box h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-bottom: 8px;
+        }
+
+        .contact-box p {
+            color: #065F46;
+            font-size: 0.92rem;
+            margin-bottom: 12px;
+        }
+
+        .contact-email {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+            transition: opacity 0.2s ease;
+        }
+
+        .contact-email:hover {
+            opacity: 0.95;
+        }
+
+        /* 底部页脚 */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        /* 移动端适配 */
+        @media (max-width: 640px) {
+            .container {
+                padding: 40px 16px;
+            }
+            main {
+                padding: 24px 16px;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-gradient-decorator"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo-wrapper">
+                <svg class="logo-svg" viewBox="0 0 24 24">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+            </div>
+            <h1>《戒烟了吗》使用说明与支持</h1>
+            <div class="subtitle">科学追踪戒烟进度，见证身体器官和细胞在无烟环境下的每日重生</div>
+        </header>
+
+        <main>
+            <!-- 1. 功能介绍 -->
+            <section>
+                <h2>App 核心功能展示</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">⏱</div>
+                        <h3>戒烟时长与进度追踪</h3>
+                        <p>一键计算累计无烟时间、少吸烟支数及所节省的烟费开支。通过精确的实时数据看板，让戒烟成果一目了然。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">❤️</div>
+                        <h3>生理指标修复评估</h3>
+                        <p>关联 Apple 健康数据，读取静息心率、心率变异性（HRV）、血氧及睡眠状况，全方位科学评估并展示您的心血管和肺部修复状况。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🎮</div>
+                        <h3>烟瘾渴望意志急救</h3>
+                        <p>内置正念呼吸练习、消除气泡、擦除和刮刮乐等轻量意志急救解压游戏，在您想抽烟时有效转移注意力，保卫无烟恒心。</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🏆</div>
+                        <h3>健康积分与里程碑奖励</h3>
+                        <p>每天打卡与完成急救小游戏可获取免费的无烟健康积分。在积分极速商店中，您可使用积分兑换补签卡以守护您的打卡记录。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. 操作说明 -->
+            <section>
+                <h2>简要操作说明</h2>
+                <div class="steps-container">
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>设定戒烟目标与历史</h3>
+                            <p>首次进入 App，请在【设置】中准确填写您每日吸烟支数、每包价格、烟龄并选定“戒烟开始日期”，应用将自动据此开启修复计算。</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>每日坚持打卡</h3>
+                            <p>在首页一键打卡，记录您当天的无烟胜利成果。打卡成功可立即获得 <b>+10</b> 无烟健康积分。</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>应对渴望，呼叫急救</h3>
+                            <p>当您产生抽烟冲动时，请立即在首页点击“呼叫急救”。通过正念呼吸或解压游戏分散注意力，顺利通关可额外获得 <b>+5</b> 积分。</p>
+                        </div>
+                    </div>
+
+                    <div class="step-item">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>兑换与使用补签卡</h3>
+                            <p>在【健康奖励】页面中，使用 100 积分兑换 1 张补签卡。当您某日漏打卡导致断签时，可在日历旅程中一键温柔补签，保卫连续天数。</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. 联系方式 -->
+            <section>
+                <h2>技术支持与反馈联系</h2>
+                <div class="contact-box">
+                    <h3>遇到使用问题或有改进建议？</h3>
+                    <p>我们的独立开发者将在第一时间内为您提供人工协助、解答疑问或跟进修复 Bug。</p>
+                    <a href="mailto:wusky1988@gmail.com" class="contact-email">
+                        发送邮件至 wusky1988@gmail.com
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 《戒烟了吗》. All Rights Reserved. 保留所有权利。</p>
+            <p style="margin-top: 4px; font-size: 0.8rem;">
+                技术支持人：刘承 | 
+                <a href="privacy.html" target="_blank">《隐私政策》</a>
+            </p>
+        </footer>
+    </div>
+
+</body>
+</html>
